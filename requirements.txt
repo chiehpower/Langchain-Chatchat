@@ -3,7 +3,7 @@ fschat[model_worker]==0.2.28
 openai
 sentence_transformers
 transformers>=4.31.0
-torch~=2.0.0
+# torch~=2.0.0
 fastapi~=0.99.1
 nltk~=3.8.1
 uvicorn~=0.23.1
