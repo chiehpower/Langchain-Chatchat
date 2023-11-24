@@ -1,0 +1,30 @@
+# Maintainer: Chieh
+
+version: "3.8"
+services:
+  LangchainChatchat:
+    # image: nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
+    # image: pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel (WORK)
+    # image: langchainchatchat:v0.1
+    image: docker.io/chiehpower/example:langchain_v0.1
+    shm_size: 50g
+    volumes:
+      - ${PWD}:/workspace
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+    ports:
+      - "8888:8888"
+      - "8501:8501"
+      - "7861:7861"
+      - "20001:20001"
+      - "9010:9010"
+    storage_opt:
+      size: '200G'
+    container_name: Langchain-Chatchat
+    command: bash -c "/usr/bin/supervisord -c /etc/supervisor/supervisord.conf"
+    restart: always
